@@ -1,21 +1,26 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {sendMessage} from './chat';
+import {connect} from 'react-redux';
+
+
 
 class App extends Component {
   render() {
+    const {feed} = this.props;
+    console.log(feed)
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
+        <h1>Hello Bot</h1>
+         <ul>
+          {feed.map(entry => <li>{entry.text}</li> )}
+         </ul>
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  feed: state
+})
+
+export default connect(mapStateToProps, {sendMessage})(App);
