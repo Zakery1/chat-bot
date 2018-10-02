@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import {sendMessage} from './chat';
 import {connect} from 'react-redux';
+import 'milligram';
 
 
 
 class App extends Component {
   render() {
-    const {feed} = this.props;
+    const {feed, sendMessage} = this.props;
     console.log(feed)
     return (
       <div>
@@ -14,6 +15,7 @@ class App extends Component {
          <ul>
           {feed.map(entry => <li>{entry.text}</li> )}
          </ul>
+         <input type="text" onKeyDown={ e => e.keyCode===13 ? sendMessage(e.target.value): null} />
       </div>
     );
   }
